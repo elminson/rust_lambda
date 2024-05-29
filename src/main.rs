@@ -52,8 +52,8 @@ pub(crate) async fn my_handler(event: LambdaEvent<Request>) -> Result<Response, 
 
 #[cfg(test)]
 mod tests {
+    use lambda_http::{Context, LambdaEvent};
     use crate::{my_handler, Request};
-    use lambda_runtime::{Context, LambdaEvent};
 
     #[tokio::test]
     async fn response_is_good_for_simple_input() {
@@ -64,13 +64,13 @@ mod tests {
 
         let payload = Request {
             command: "X".to_string(),
-            name: "".to_string(),
+            name: "Y".to_string(),
         };
         let event = LambdaEvent { payload, context };
 
         let result = my_handler(event).await.unwrap();
 
-        assert_eq!(result.msg, "Command X executed.");
+        assert_eq!(result.msg, "Hi Y, Command X executed.");
         assert_eq!(result.req_id, id.to_string());
     }
 }
