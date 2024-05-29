@@ -626,6 +626,7 @@ dependencies = [
  "lambda_http",
  "serde",
  "tokio",
+ "tracing",
 ]
 
 [[package]]
